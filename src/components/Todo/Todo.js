@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
-import {Header, Button, Divider, Icon} from 'semantic-ui-react';
+import {Header, Divider, Icon} from 'semantic-ui-react';
 import '../../App.css';
 import NewTodoForm from './NewTodoForm';
 import TodoList from './TodoList';
+import TodoFilter from './TodoFilter';
 
 export default class Todo extends Component {
   constructor(){
     super();
-
     this.state = {
       message: "React JS Todo List",
       newTodo: '',
@@ -103,14 +103,11 @@ export default class Todo extends Component {
           formSubmitted={this.formSubmitted.bind(this)} 
           newTodoChanged={this.newTodoChanged.bind(this)} />
 
-        <Divider horizontal>
-          <Header as='h4'> <Icon name='tag' /> Current Todo List </Header>
-        </Divider>
+        <Divider horizontal> <Header as='h4'> <Icon name='tag' /> Current Todo List </Header> </Divider>
 
-        <Button.Group size="mini"> 
-          <Button onClick={()=>this.allDone()} color="green">All Done</Button>
-          <Button onClick={()=>this.allRemaining()} color="red">All Remaining</Button>
-        </Button.Group>
+        <TodoFilter
+          allDone={this.allDone.bind(this)}
+          allRemaining={this.allRemaining.bind(this)} />
 
         <TodoList
           todos={this.state.todos}
